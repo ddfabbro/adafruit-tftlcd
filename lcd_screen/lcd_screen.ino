@@ -84,9 +84,12 @@ void settingsGUI() {
   tft.drawLine(160,96,160,240,BLACK);
 }
 
-void update_temperature_real() {
+void update_sensor_values() {
   tft.fillRect(160, 20, 58, 14, BLACK); tft.setTextColor(WHITE);
   tft.setCursor(160, 20); tft.println(temperature_real);
+
+  tft.fillRect(160, 60, 58, 14, BLACK); tft.setTextColor(WHITE);
+  tft.setCursor(160, 60); tft.println(humidity_real);
 }
 
 void update_temperature_target() {
@@ -98,11 +101,6 @@ void update_temperature_target() {
     temperature_target = -9.9;
   }
   tft.setCursor(245, 20); tft.println(temperature_target);
-}
-
-void update_humidity_real() {
-  tft.fillRect(160, 60, 58, 14, BLACK); tft.setTextColor(WHITE);
-  tft.setCursor(160, 60); tft.println(humidity_real);
 }
 
 void update_humidity_target() {
@@ -134,7 +132,7 @@ void setup(void) {
 
 void loop(void) {
   touch_event = false;
-
+  
   if (state == 0) {
     homeGUI();
     while (touch_event == false) {
