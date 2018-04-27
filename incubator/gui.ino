@@ -49,33 +49,3 @@ void settingsGUI() {
   tft.drawLine(0,168,320,168,BLACK);
   tft.drawLine(160,96,160,240,BLACK);
 }
-
-void update_sensor_values() {
-  tft.fillRect(160, 20, 58, 14, BLACK); tft.setTextColor(WHITE);
-  tft.setCursor(160, 20); tft.println(temperature_real);
-
-  tft.fillRect(160, 60, 58, 14, BLACK); tft.setTextColor(WHITE);
-  tft.setCursor(160, 60); tft.println(humidity_real);
-}
-
-void update_temperature_target() {
-  tft.fillRect(245, 20, 70, 14, BLACK); tft.setTextColor(WHITE);
-  if (temperature_target > 99.9) {
-    temperature_target = 99.9;
-  }
-  else if (temperature_target < -9.9) {
-    temperature_target = -9.9;
-  }
-  tft.setCursor(245, 20); tft.println(temperature_target);
-}
-
-void update_humidity_target() {
-  tft.fillRect(245, 60, 70, 14, BLACK); tft.setTextColor(WHITE);
-  if (humidity_target > 100) {
-    humidity_target = 100;
-  }
-  else if (humidity_target < 0) {
-    humidity_target = 0;
-  }
-  tft.setCursor(245, 60); tft.println(humidity_target);
-}

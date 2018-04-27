@@ -1,9 +1,13 @@
 void loop(void) {
+  byte state = 0;
+  bool touch_event = false;
+
   touch_event = false;
   
   if (state == 0) {
     homeGUI();
     while (touch_event == false) {
+      update_readings();
       switch_mode();
       TSPoint p = ts.getPoint();
       switch_mode();
@@ -20,6 +24,7 @@ void loop(void) {
   if (state == 1) {
     menuGUI();
     while (touch_event == false) {
+      update_readings();
       switch_mode();
       TSPoint p = ts.getPoint();
       switch_mode();
@@ -43,6 +48,7 @@ void loop(void) {
   if (state == 2) {
     settingsGUI();
     while (touch_event == false) {
+      update_readings();
       switch_mode();
       TSPoint p = ts.getPoint();
       switch_mode();
@@ -78,6 +84,7 @@ void loop(void) {
   if (state == 3) {
     settingsGUI();
     while (touch_event == false) {
+      update_readings();
       switch_mode();
       TSPoint p = ts.getPoint();
       switch_mode();
