@@ -1,0 +1,7 @@
+void heat() {
+  
+}
+
+void cool() {
+  
+}

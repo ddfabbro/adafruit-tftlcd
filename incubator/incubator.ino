@@ -1,6 +1,6 @@
-#include <Adafruit_GFX.h> 
-#include <Adafruit_TFTLCD.h>
-#include <TouchScreen.h>
+#include <SPFD5408_Adafruit_GFX.h>
+#include <SPFD5408_Adafruit_TFTLCD.h>
+#include <SPFD5408_TouchScreen.h>
 #include <DHT.h>
 #include <math.h>
 
@@ -11,14 +11,17 @@
 #define XP 6
 
 //define TFTLCD pins
-#define LCD_CS A3
-#define LCD_CD A2
-#define LCD_WR A1
 #define LCD_RD A0
+#define LCD_WR A1
+#define LCD_CD A2
+#define LCD_CS A3
 #define LCD_RESET A4
 
 //define DHT pin
-#define DHTPIN 10
+#define DHTPIN 22
+
+//define thermistor
+#define ThermistorPIN A8
 
 //define other variables
 #define MINPRESSURE 10
@@ -26,9 +29,11 @@
 #define BLACK           0xFFFF //0x0000
 #define WHITE           0x0000 //0xFFFF
 
+byte state = 0;
+bool touch_event = false;
 bool temperature_fan = true;
 bool humidity_fan = false;
-int sensorPin = A5;
+
 float temperature_real;
 float temperature_target = 25;
 float humidity_real;
@@ -38,8 +43,8 @@ unsigned long time;
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 DHT dht(DHTPIN, DHT11);
- 
-void switch_mode() {
+
+void reconfig() {
   pinMode(XM, OUTPUT);
   pinMode(YP, OUTPUT);
 }
@@ -53,7 +58,7 @@ void setup(void) {
   tft.setRotation(1);
   tft.setTextSize(2);
   
-  temperature_real = dht.readTemperature();
+  temperature_real = readThermistor();
   humidity_real = dht.readHumidity();
 
   monitor();

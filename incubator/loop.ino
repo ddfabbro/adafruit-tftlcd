@@ -1,18 +1,24 @@
 void loop(void) {
-  byte state = 0;
-  bool touch_event = false;
-
   touch_event = false;
   
   if (state == 0) {
     homeGUI();
     while (touch_event == false) {
-      update_readings();
-      switch_mode();
+      reconfig();
       TSPoint p = ts.getPoint();
-      switch_mode();
+      reconfig();
+      updateReadings(readThermistor(),dht.readHumidity());
+
+      if (temperature_real > temperature_target) {
+        cool();
+      }
+
+      else {
+        heat();
+      }
+      
       if (p.z > MINPRESSURE && p.z < MAXPRESSURE) {
-        if (p.y < 300) {
+        if (p.y < 360) {
           tft.fillRect(0, 96, 320, 240, WHITE);
           state = 1;
           touch_event = true;
@@ -24,16 +30,15 @@ void loop(void) {
   if (state == 1) {
     menuGUI();
     while (touch_event == false) {
-      update_readings();
-      switch_mode();
+      reconfig();
       TSPoint p = ts.getPoint();
-      switch_mode();
+      reconfig();
       if (p.z > MINPRESSURE && p.z < MAXPRESSURE) {
         touch_event = true;
-        if (p.y > 700) {
+        if (p.y > 600) {
           state = 0; 
         }
-        else if (p.y > 300) {
+        else if (p.y > 360) {
           tft.fillRect(0, 96, 320, 240, WHITE);
           state = 2;
         }
@@ -48,17 +53,16 @@ void loop(void) {
   if (state == 2) {
     settingsGUI();
     while (touch_event == false) {
-      update_readings();
-      switch_mode();
+      reconfig();
       TSPoint p = ts.getPoint();
-      switch_mode();
+      reconfig();
       if (p.z > MINPRESSURE && p.z < MAXPRESSURE) {
         touch_event = true;
-        if (p.y > 700) {
+        if (p.y > 600) {
           state = 0;
         }
-        else if (p.y > 300) {
-          if (p.x > 500) {
+        else if (p.y > 360) {
+          if (p.x > 530) {
             temperature_target = temperature_target + 1;
             update_temperature_target();
           }
@@ -68,7 +72,7 @@ void loop(void) {
           }
         }
         else {
-          if (p.x > 500) {
+          if (p.x > 530) {
             temperature_target = temperature_target + .1;
             update_temperature_target();
           }
@@ -84,17 +88,16 @@ void loop(void) {
   if (state == 3) {
     settingsGUI();
     while (touch_event == false) {
-      update_readings();
-      switch_mode();
+      reconfig();
       TSPoint p = ts.getPoint();
-      switch_mode();
+      reconfig();
       if (p.z > MINPRESSURE && p.z < MAXPRESSURE) {
         touch_event = true;
-        if (p.y > 700) {
+        if (p.y > 600) {
           state = 0;
         }
-        else if (p.y > 300) {
-          if (p.x > 500) {
+        else if (p.y > 360) {
+          if (p.x > 530) {
             humidity_target = humidity_target + 1;
             update_humidity_target();
           }
@@ -104,7 +107,7 @@ void loop(void) {
           }
         }
         else {
-          if (p.x > 500) {
+          if (p.x > 530) {
             humidity_target = humidity_target + .1;
             update_humidity_target();
           }

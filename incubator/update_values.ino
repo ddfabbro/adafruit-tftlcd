@@ -1,34 +1,18 @@
-void update_readings() {
+void updateReadings(float new_temperature_real, float new_humidity_real) {
   if((millis()-time) >= 1000) {
     time = millis();
+    
+    if (new_temperature_real != temperature_real) {
+      tft.fillRect(160, 20, 58, 14, BLACK); tft.setTextColor(WHITE);
+      tft.setCursor(160, 20); tft.println(new_temperature_real);
+      temperature_real = new_temperature_real;
+    }
 
-    read_temperature();
-    read_humidity();
-  }
-}
-
-void read_temperature() {
-  double new_temperature_real;
-  
-  int readVal = analogRead(sensorPin); 
-  new_temperature_real = Thermistor(readVal);
-
-  if (new_temperature_real != temperature_real) {
-    tft.fillRect(160, 20, 58, 14, BLACK); tft.setTextColor(WHITE);
-    tft.setCursor(160, 20); tft.println(new_temperature_real);
-    temperature_real = new_temperature_real;
-  }
-}
-
-void read_humidity() {
-  float new_humidity_real;
-
-  new_humidity_real = dht.readHumidity();
-
-  if (new_humidity_real != humidity_real) {
-    tft.fillRect(160, 60, 58, 14, BLACK); tft.setTextColor(WHITE);
-    tft.setCursor(160, 60); tft.println(new_humidity_real);
-    humidity_real = new_humidity_real;
+    if (new_humidity_real != humidity_real) {
+      tft.fillRect(160, 60, 58, 14, BLACK); tft.setTextColor(WHITE);
+      tft.setCursor(160, 60); tft.println(new_humidity_real);
+      humidity_real = new_humidity_real;
+    }
   }
 }
 
