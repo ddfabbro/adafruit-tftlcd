@@ -3,6 +3,6 @@ Display and touchscreen code for Adafruit TFT TouchScreen Shield
 
 ## Dependencies
 
-* [Adafruit_GFX.h](https://github.com/adafruit/Adafruit-GFX-Library)
-* [Adafruit_TFTLCD.h](https://github.com/adafruit/TFTLCD-Library)
-* [TouchScreen.h](https://github.com/adafruit/Touch-Screen-Library)
+* [Common sensor library ](https://github.com/adafruit/Adafruit_Sensor)
+* [DHT-sensor-library](https://github.com/adafruit/DHT-sensor-library)
+* [SPFD5408](https://github.com/JoaoLopesF/SPFD5408)
