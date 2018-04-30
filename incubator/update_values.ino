@@ -16,7 +16,7 @@ void updateReadings(float new_temperature_real, float new_humidity_real) {
   }
 }
 
-void update_temperature_target() {
+void updateTemperatureTarget() {
   tft.fillRect(245, 20, 70, 14, BLACK); tft.setTextColor(WHITE);
   if (temperature_target > 99.9) {
     temperature_target = 99.9;
@@ -27,7 +27,7 @@ void update_temperature_target() {
   tft.setCursor(245, 20); tft.println(temperature_target);
 }
 
-void update_humidity_target() {
+void updateHumidityTarget() {
   tft.fillRect(245, 60, 70, 14, BLACK); tft.setTextColor(WHITE);
   if (humidity_target > 100) {
     humidity_target = 100;

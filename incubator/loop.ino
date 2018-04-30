@@ -64,21 +64,21 @@ void loop(void) {
         else if (p.y > 360) {
           if (p.x > 530) {
             temperature_target = temperature_target + 1;
-            update_temperature_target();
+            updateTemperatureTarget();
           }
           else {
             temperature_target = temperature_target - 1;
-            update_temperature_target();
+            updateTemperatureTarget();
           }
         }
         else {
           if (p.x > 530) {
             temperature_target = temperature_target + .1;
-            update_temperature_target();
+            updateTemperatureTarget();
           }
           else {
             temperature_target = temperature_target - .1;
-            update_temperature_target();
+            updateTemperatureTarget();
           }
         }
       }
@@ -99,21 +99,21 @@ void loop(void) {
         else if (p.y > 360) {
           if (p.x > 530) {
             humidity_target = humidity_target + 1;
-            update_humidity_target();
+            updateHumidityTarget();
           }
           else {
             humidity_target = humidity_target - 1;
-            update_humidity_target();
+            updateHumidityTarget();
           }
         }
         else {
           if (p.x > 530) {
             humidity_target = humidity_target + .1;
-            update_humidity_target();
+            updateHumidityTarget();
           }
           else {
             humidity_target = humidity_target - .1;
-            update_humidity_target();
+            updateHumidityTarget();
           }
         }
       }

@@ -18,7 +18,7 @@
 #define LCD_RESET A4
 
 //define DHT pin
-#define DHTPIN 22
+#define DHTPIN 52
 
 //define thermistor
 #define ThermistorPIN A8
