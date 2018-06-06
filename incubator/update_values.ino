@@ -27,13 +27,15 @@ void updateTemperatureTarget() {
   tft.setCursor(245, 20); tft.println(temperature_target);
 }
 
-void updateHumidityTarget() {
-  tft.fillRect(245, 60, 70, 14, BLACK); tft.setTextColor(WHITE);
-  if (humidity_target > 100) {
-    humidity_target = 100;
+void updateUVTarget() {
+  tft.fillRect(215, 100, 70, 14, BLACK); tft.setTextColor(WHITE);
+  tft.setCursor(215, 100); 
+  if (uv_led == true) {
+    tft.setCursor(215, 100); tft.println("ON");
   }
-  else if (humidity_target < 0) {
-    humidity_target = 0;
+  else {
+    tft.setCursor(215, 100); tft.println("OFF");
   }
-  tft.setCursor(245, 60); tft.println(humidity_target);
+
 }
+

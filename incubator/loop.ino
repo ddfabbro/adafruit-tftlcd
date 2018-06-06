@@ -43,7 +43,8 @@ void loop(void) {
           state = 2;
         }
         else {
-          tft.fillRect(0, 96, 320, 240, WHITE);
+          tft.fillRect(0, 96, 320, 168, BLACK);
+          tft.fillRect(0, 168, 320, 240, WHITE);
           state = 3;
         }
       }
@@ -51,7 +52,7 @@ void loop(void) {
   }
 
   if (state == 2) {
-    settingsGUI();
+    setTemperatureGUI();
     while (touch_event == false) {
       reconfig();
       TSPoint p = ts.getPoint();
@@ -86,34 +87,24 @@ void loop(void) {
   }
 
   if (state == 3) {
-    settingsGUI();
+    setUVLEDGUI();
     while (touch_event == false) {
       reconfig();
       TSPoint p = ts.getPoint();
       reconfig();
       if (p.z > MINPRESSURE && p.z < MAXPRESSURE) {
         touch_event = true;
-        if (p.y > 600) {
+        if (p.y > 360) {
           state = 0;
-        }
-        else if (p.y > 360) {
-          if (p.x > 530) {
-            humidity_target = humidity_target + 1;
-            updateHumidityTarget();
-          }
-          else {
-            humidity_target = humidity_target - 1;
-            updateHumidityTarget();
-          }
         }
         else {
           if (p.x > 530) {
-            humidity_target = humidity_target + .1;
-            updateHumidityTarget();
+            uv_led = true;
+            updateUVTarget();
           }
           else {
-            humidity_target = humidity_target - .1;
-            updateHumidityTarget();
+            uv_led = false;
+            updateUVTarget();
           }
         }
       }

@@ -31,13 +31,11 @@
 
 byte state = 0;
 bool touch_event = false;
-bool temperature_fan = true;
-bool humidity_fan = false;
+bool uv_led = true;
 
 float temperature_real;
 float temperature_target = 25;
 float humidity_real;
-float humidity_target = 50;
 unsigned long time;
 
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
